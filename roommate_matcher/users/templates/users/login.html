@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="{% static 'users/styles.css' %}">
+</head>
+<body>
+  <div class="form-container">
+    <h2>Login</h2>
+
+    {% if form.errors %}
+      <div class="error-box">
+        <ul>
+          {% for field in form %}
+            {% for error in field.errors %}
+              <li>{{ field.label }}: {{ error }}</li>
+            {% endfor %}
+          {% endfor %}
+          {% for error in form.non_field_errors %}
+              <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    <form method="POST">
+      {% csrf_token %}
+
+      <label for="id_username">Email</label>
+      <input type="email" name="username" id="id_username"
+             value="{{ form.data.username }}" required placeholder="Enter your email">
+      
+      <label for="id_password">Password</label>
+      <input type="password" name="password" id="id_password" required placeholder="Enter your password">
+
+      <button type="submit">Login</button>
+    </form>
+
+    <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+  </div>
+</body>
+</html>

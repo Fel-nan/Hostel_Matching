@@ -1,0 +1,20 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="{% static 'users/styles.css' %}">
+</head>
+<body>
+  <div class="dashboard-container">
+    <h2>Welcome, {{ request.user.username }} 👋</h2>
+    <p>Your index number: <strong>{{ request.user.index_number }}</strong></p>
+
+    <div class="dashboard-actions">
+      <a href="{% url 'logout' %}" class="dashboard-button">Logout</a>
+    </div>
+  </div>
+</body>
+</html>

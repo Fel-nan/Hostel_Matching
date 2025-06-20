@@ -1,0 +1,49 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="{% static 'users/styles.css' %}">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Create Account</h2>
+        {% if form.errors %}
+    <div class="error-box">
+    <ul>
+        {% for field in form %}
+            {% for error in field.errors %}
+                <li>{{ field.label }}: {{ error }}</li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+           <label for="id_full_name">Full Name</label>
+<input type="text" name="full_name" id="id_full_name" required value="{{ form.data.full_name }}">
+
+<label for="id_email">Email</label>
+<input type="email" name="email" id="id_email" required value="{{ form.data.email }}">
+
+<label for="id_index_number">Index Number</label>
+<input type="text" name="index_number" id="id_index_number" required value="{{ form.data.index_number }}">
+
+<label for="id_password1">Password</label>
+<input type="password" name="password1" id="id_password1" required>
+
+<label for="id_password2">Confirm Password</label>
+<input type="password" name="password2" id="id_password2" required>
+
+
+            <button type="submit">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+    </div>
+</body>
+</html>
